@@ -3,6 +3,11 @@
 // Load All Post
 
 const loadAllPost = async(category) => {
+    /* when search by category name then all post container will be empty 
+    and add only search post display in post container.*/
+    document.getElementById('post-container').innerHTML = ""
+    
+    // Featch Post Data from Api
     const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts${category?`?category=${category}`: ""}`)
     const data = await response.json()
     displayAllPost(data.posts)
@@ -100,12 +105,19 @@ const markAsRead = (title,description,author, category,  comment_count, view_cou
     
     `
     markAsReadContainer.appendChild(div)
+
+    // Count Function
+    markPostCount()
 }
 
-// display marking post data
-// const displayMarkPost = (mark) => {
-    
-// }
+// Count display marking post 
+const markPostCount = () => {
+    const previewCount = document.getElementById('markAsReadCounter').innerText;
+    const convertCount = parseInt(previewCount);
+    const sum = convertCount + 1;
+    document.getElementById('markAsReadCounter').innerText = sum
+}
+
 
 // Search by category
 
